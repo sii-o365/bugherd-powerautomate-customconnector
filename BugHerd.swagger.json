@@ -1,0 +1,2382 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BugHerd API",
+    "description": "OpenAPI definition for Bugherd",
+    "version": "v1"
+  },
+  "host": "www.bugherd.com",
+  "basePath": "/api_v2",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/organization.json": {
+      "get": {
+        "summary": "Show organization",
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          }
+        },
+        "description": "Get more detail of your account.",
+        "operationId": "Show_Organization",
+        "parameters": []
+      }
+    },
+    "/users.json": {
+      "get": {
+        "summary": "List all users",
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/UserArray"
+            }
+          }
+        },
+        "description": "See all the people in your account.",
+        "operationId": "List_All_Users"
+      }
+    },
+    "/users/members.json": {
+      "get": {
+        "summary": "List members",
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/UserArray"
+            }
+          }
+        },
+        "description": "See all members in your account.",
+        "operationId": "List_All_Members"
+      }
+    },
+    "/users/guests.json": {
+      "get": {
+        "summary": "List guests",
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/UserArray"
+            }
+          }
+        },
+        "description": "See all guests in your account.",
+        "operationId": "List_All_Guests"
+      }
+    },
+    "/projects.json": {
+      "get": {
+        "summary": "List all projects",
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/ProjectArray"
+            }
+          }
+        },
+        "description": "Get a list of all projects within your account.",
+        "operationId": "List_All_Projects"
+      },
+      "post": {
+        "summary": "Create project",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "project",
+            "description": "Project data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "project": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "id"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "name"
+                    },
+                    "devurl": {
+                      "type": "string",
+                      "description": "devurl"
+                    },
+                    "api_key": {
+                      "type": "string",
+                      "description": "api_key"
+                    },
+                    "is_active": {
+                      "type": "boolean",
+                      "description": "is_active"
+                    },
+                    "is_public": {
+                      "type": "boolean",
+                      "description": "is_public"
+                    },
+                    "has_custom_columns": {
+                      "type": "boolean",
+                      "description": "has_custom_columns"
+                    },
+                    "members": {
+                      "type": "array",
+                      "items": {},
+                      "description": "members"
+                    },
+                    "guests": {
+                      "type": "array",
+                      "items": {},
+                      "description": "guests"
+                    },
+                    "columns": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "id"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "name"
+                          },
+                          "project_id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "project_id"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "description": "created_at"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "description": "updated_at"
+                          }
+                        }
+                      },
+                      "description": "columns"
+                    }
+                  },
+                  "description": "project"
+                }
+              }
+            }
+          }
+        },
+        "description": "Create a new project. The project will initially have no members.",
+        "operationId": "Create_Project"
+      }
+    },
+    "/projects/active.json": {
+      "get": {
+        "summary": "List active projects",
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/ProjectArray"
+            }
+          }
+        },
+        "description": "Get a list of active projects within your account.",
+        "operationId": "List_Active_Projects"
+      }
+    },
+    "/projects/{project_id}.json": {
+      "get": {
+        "summary": "Get a project",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "type": "string",
+            "description": "Project identification number.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "project": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "id"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "name"
+                    },
+                    "devurl": {
+                      "type": "string",
+                      "description": "devurl"
+                    },
+                    "api_key": {
+                      "type": "string",
+                      "description": "api_key"
+                    },
+                    "is_active": {
+                      "type": "boolean",
+                      "description": "is_active"
+                    },
+                    "is_public": {
+                      "type": "string",
+                      "description": "is_public"
+                    },
+                    "has_custom_columns": {
+                      "type": "boolean",
+                      "description": "has_custom_columns"
+                    },
+                    "members": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "id"
+                          },
+                          "email": {
+                            "type": "string",
+                            "description": "email"
+                          },
+                          "display_name": {
+                            "type": "string",
+                            "description": "display_name"
+                          },
+                          "avatar_url": {
+                            "type": "string",
+                            "description": "avatar_url"
+                          }
+                        }
+                      },
+                      "description": "members"
+                    },
+                    "guests": {
+                      "type": "array",
+                      "items": {},
+                      "description": "guests"
+                    },
+                    "columns": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "id"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "name"
+                          },
+                          "project_id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "project_id"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "description": "created_at"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "description": "updated_at"
+                          }
+                        }
+                      },
+                      "description": "columns"
+                    }
+                  },
+                  "description": "project"
+                }
+              }
+            }
+          }
+        },
+        "description": "Show details for a specific project.",
+        "operationId": "Get_Project"
+      },
+      "delete": {
+        "summary": "Delete a project",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "type": "string",
+            "description": "Project identification number.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "success"
+                }
+              }
+            }
+          }
+        },
+        "description": "Delete a project and all associated data.",
+        "operationId": "Delete_Project"
+      },
+      "put": {
+        "summary": "Update a project",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "type": "string",
+            "description": "Project identification number.",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "project",
+            "description": "Project data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response"
+          }
+        },
+        "description": "Update settings for an existing project under your control.",
+        "operationId": "Update_Project"
+      }
+    },
+    "/projects/{project_id}/add_member.json": {
+      "post": {
+        "summary": "Add a member.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user_id",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          {
+            "in": "path",
+            "name": "project_id",
+            "type": "string",
+            "description": "Project identification number.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success response"
+          }
+        },
+        "description": "Add a member to a project.",
+        "operationId": "Add_Member"
+      }
+    },
+    "/projects/{project_id}/add_guest.json": {
+      "post": {
+        "summary": "Add a guest to a project.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user_id",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          {
+            "in": "path",
+            "name": "project_id",
+            "type": "string",
+            "description": "Project identification number.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success response"
+          }
+        },
+        "description": "Add an existing guest to a project.",
+        "operationId": "Add_Guest"
+      }
+    },
+    "/webhooks.json": {
+      "x-ms-notification-content": {
+        "description": "Response"
+      }
+    },
+    "/projects/{project_id}/tasks.json": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tasks": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "id"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "description": "created_at"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "description": "updated_at"
+                      },
+                      "local_task_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "local_task_id"
+                      },
+                      "priority_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "priority_id"
+                      },
+                      "assigned_to_id": {
+                        "type": "string",
+                        "description": "assigned_to_id"
+                      },
+                      "status_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "status_id"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "status"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "description"
+                      },
+                      "tag_names": {
+                        "type": "array",
+                        "items": {},
+                        "description": "tag_names"
+                      },
+                      "external_id": {
+                        "type": "string",
+                        "description": "external_id"
+                      },
+                      "requester_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "requester_id"
+                      },
+                      "requester_email": {
+                        "type": "string",
+                        "description": "requester_email"
+                      },
+                      "due_at": {
+                        "type": "string",
+                        "description": "due_at"
+                      },
+                      "assignee_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "description": "assignee_ids"
+                      },
+                      "column_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "column_id"
+                      }
+                    }
+                  },
+                  "description": "tasks"
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "count"
+                    }
+                  },
+                  "description": "meta"
+                }
+              }
+            }
+          }
+        },
+        "summary": "List tasks",
+        "description": "Get a full list of tasks for a project",
+        "operationId": "List_Tasks",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-visibility": "advanced"
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "id"
+                    },
+                    "project_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "project_id"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "description": "created_at"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "description": "updated_at"
+                    },
+                    "local_task_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "local_task_id"
+                    },
+                    "priority_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "priority_id"
+                    },
+                    "status_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "status_id"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "description"
+                    },
+                    "tag_names": {
+                      "type": "array",
+                      "items": {},
+                      "description": "tag_names"
+                    },
+                    "external_id": {
+                      "type": "string",
+                      "description": "external_id"
+                    },
+                    "requester_email": {
+                      "type": "string",
+                      "description": "requester_email"
+                    },
+                    "attachments": {
+                      "type": "array",
+                      "items": {},
+                      "description": "attachments"
+                    },
+                    "screenshot_url": {
+                      "type": "string",
+                      "description": "screenshot_url"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "status"
+                    },
+                    "priority": {
+                      "type": "string",
+                      "description": "priority"
+                    },
+                    "closed_at": {
+                      "type": "string",
+                      "description": "closed_at"
+                    },
+                    "secret_link": {
+                      "type": "string",
+                      "description": "secret_link"
+                    },
+                    "admin_link": {
+                      "type": "string",
+                      "description": "admin_link"
+                    },
+                    "deleted_at": {
+                      "type": "string",
+                      "description": "deleted_at"
+                    },
+                    "site": {
+                      "type": "string",
+                      "description": "site"
+                    },
+                    "url": {
+                      "type": "string",
+                      "description": "url"
+                    },
+                    "metadata": {
+                      "type": "string",
+                      "description": "metadata"
+                    },
+                    "screenshot_data": {
+                      "type": "string",
+                      "description": "screenshot_data"
+                    },
+                    "requester_os": {
+                      "type": "string",
+                      "description": "requester_os"
+                    },
+                    "requester_browser": {
+                      "type": "string",
+                      "description": "requester_browser"
+                    },
+                    "requester_browser_size": {
+                      "type": "string",
+                      "description": "requester_browser_size"
+                    },
+                    "requester_resolution": {
+                      "type": "string",
+                      "description": "requester_resolution"
+                    },
+                    "selector_info": {
+                      "type": "object",
+                      "properties": {},
+                      "description": "selector_info"
+                    },
+                    "due_at": {
+                      "type": "string",
+                      "description": "due_at"
+                    },
+                    "column_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "column_id"
+                    },
+                    "assignees": {
+                      "type": "array",
+                      "items": {},
+                      "description": "assignees"
+                    },
+                    "assigned_to": {
+                      "type": "string",
+                      "description": "assigned_to"
+                    },
+                    "requester": {
+                      "type": "string",
+                      "description": "requester"
+                    },
+                    "updater": {
+                      "type": "string",
+                      "description": "updater"
+                    }
+                  },
+                  "description": "task"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Add new task",
+        "description": "Add a new task in a project",
+        "operationId": "Add_New_Task",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string",
+                      "description": "description"
+                    },
+                    "priority": {
+                      "type": "string",
+                      "description": "priority",
+                      "title": "",
+                      "enum": [
+                        "not set",
+                        "critical",
+                        "important",
+                        "normal",
+                        "minor"
+                      ]
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "status"
+                    },
+                    "requester_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "requester_id"
+                    },
+                    "tag_names": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "tag_names"
+                    },
+                    "assigned_to_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "assigned_to_id"
+                    },
+                    "external_id": {
+                      "type": "string",
+                      "description": "external_id"
+                    }
+                  },
+                  "description": "task"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/projects/{project_id}/tasks/archive.json": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tasks": {
+                  "type": "array",
+                  "items": {},
+                  "description": "tasks"
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "count"
+                    }
+                  },
+                  "description": "meta"
+                }
+              }
+            }
+          }
+        },
+        "summary": "List archived tasks",
+        "description": "Lists archived tasks",
+        "operationId": "List_Archived_Tasks",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project_id}/tasks/{task_id}.json": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {}
+          }
+        },
+        "summary": "Show task",
+        "description": "List details of a task in a given project, includes all data including comments, attachments, etc.",
+        "operationId": "Show_Task",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        },
+        "summary": "Update task",
+        "description": "Update one of the tasks in a project.",
+        "operationId": "Update_Task",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string",
+                      "description": "description"
+                    },
+                    "priority": {
+                      "type": "string",
+                      "description": "priority"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "status"
+                    },
+                    "requester_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "requester_id"
+                    },
+                    "tag_names": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "tag_names"
+                    },
+                    "assigned_to_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "assigned_to_id"
+                    },
+                    "external_id": {
+                      "type": "string",
+                      "description": "external_id"
+                    }
+                  },
+                  "description": "task"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/projects/{project_Id}/local_tasks/{local_task_id}.json": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "id"
+                    },
+                    "project_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "project_id"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "description": "created_at"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "description": "updated_at"
+                    },
+                    "local_task_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "local_task_id"
+                    },
+                    "priority_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "priority_id"
+                    },
+                    "status_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "status_id"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "description"
+                    },
+                    "tag_names": {
+                      "type": "array",
+                      "items": {},
+                      "description": "tag_names"
+                    },
+                    "external_id": {
+                      "type": "string",
+                      "description": "external_id"
+                    },
+                    "requester_email": {
+                      "type": "string",
+                      "description": "requester_email"
+                    },
+                    "attachments": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "id"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "name"
+                          },
+                          "url": {
+                            "type": "string",
+                            "description": "url"
+                          }
+                        }
+                      },
+                      "description": "attachments"
+                    },
+                    "screenshot_url": {
+                      "type": "string",
+                      "description": "screenshot_url"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "status"
+                    },
+                    "priority": {
+                      "type": "string",
+                      "description": "priority"
+                    },
+                    "closed_at": {
+                      "type": "string",
+                      "description": "closed_at"
+                    },
+                    "secret_link": {
+                      "type": "string",
+                      "description": "secret_link"
+                    },
+                    "admin_link": {
+                      "type": "string",
+                      "description": "admin_link"
+                    },
+                    "deleted_at": {
+                      "type": "string",
+                      "description": "deleted_at"
+                    },
+                    "site": {
+                      "type": "string",
+                      "description": "site"
+                    },
+                    "url": {
+                      "type": "string",
+                      "description": "url"
+                    },
+                    "metadata": {
+                      "type": "string",
+                      "description": "metadata"
+                    },
+                    "screenshot_data": {
+                      "type": "object",
+                      "properties": {
+                        "screenshot_width": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "screenshot_width"
+                        },
+                        "screenshot_height": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "screenshot_height"
+                        },
+                        "screenshot_pin_x": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "screenshot_pin_x"
+                        },
+                        "screenshot_pin_y": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "screenshot_pin_y"
+                        }
+                      },
+                      "description": "screenshot_data"
+                    },
+                    "requester_os": {
+                      "type": "string",
+                      "description": "requester_os"
+                    },
+                    "requester_browser": {
+                      "type": "string",
+                      "description": "requester_browser"
+                    },
+                    "requester_browser_size": {
+                      "type": "string",
+                      "description": "requester_browser_size"
+                    },
+                    "requester_resolution": {
+                      "type": "string",
+                      "description": "requester_resolution"
+                    },
+                    "selector_info": {
+                      "type": "object",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "path"
+                        },
+                        "html": {
+                          "type": "string",
+                          "description": "html"
+                        },
+                        "version": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "version"
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "bugOffsetX": {
+                              "type": "number",
+                              "format": "float",
+                              "description": "bugOffsetX"
+                            },
+                            "bugOffsetY": {
+                              "type": "number",
+                              "format": "float",
+                              "description": "bugOffsetY"
+                            }
+                          },
+                          "description": "data"
+                        }
+                      },
+                      "description": "selector_info"
+                    },
+                    "due_at": {
+                      "type": "string",
+                      "description": "due_at"
+                    },
+                    "column_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "column_id"
+                    },
+                    "assignees": {
+                      "type": "array",
+                      "items": {},
+                      "description": "assignees"
+                    },
+                    "assigned_to": {
+                      "type": "string",
+                      "description": "assigned_to"
+                    },
+                    "requester": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "id"
+                        },
+                        "email": {
+                          "type": "string",
+                          "description": "email"
+                        },
+                        "display_name": {
+                          "type": "string",
+                          "description": "display_name"
+                        },
+                        "avatar_url": {
+                          "type": "string",
+                          "description": "avatar_url"
+                        }
+                      },
+                      "description": "requester"
+                    },
+                    "updater": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "id"
+                        },
+                        "email": {
+                          "type": "string",
+                          "description": "email"
+                        },
+                        "display_name": {
+                          "type": "string",
+                          "description": "display_name"
+                        },
+                        "avatar_url": {
+                          "type": "string",
+                          "description": "avatar_url"
+                        }
+                      },
+                      "description": "updater"
+                    }
+                  },
+                  "description": "task"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Show task by local id",
+        "description": "Search by a local task_id",
+        "operationId": "Show_Task_Local_Id",
+        "parameters": [
+          {
+            "name": "project_Id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "local_task_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project_id}/tasks/feedback.json": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tasks": {
+                  "type": "array",
+                  "items": {},
+                  "description": "tasks"
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "count"
+                    }
+                  },
+                  "description": "meta"
+                }
+              }
+            }
+          }
+        },
+        "summary": "List tasks feedback",
+        "description": "Lists tasks feedback",
+        "operationId": "List_Task_Feedback",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project_id}/columns.json": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "$ref": "#/definitions/ColumnArray"
+            }
+          }
+        },
+        "summary": "List columns",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "description": "Get a full list of columns for a project",
+        "operationId": "List_Columns"
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "description": "default",
+            "schema": {
+              "$ref": "#/definitions/Column"
+            }
+          }
+        },
+        "summary": "Create colum",
+        "description": "Create a new column on a project",
+        "operationId": "Create_column",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ColumnData"
+            }
+          }
+        ]
+      }
+    },
+    "/projects/{project_id}/columns/{column_id}.json": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "$ref": "#/definitions/Column"
+            }
+          }
+        },
+        "summary": "Show column",
+        "operationId": "Show_Column",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "column_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "description": "List details of a column in a given project,"
+      },
+      "put": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "$ref": "#/definitions/Column"
+            }
+          }
+        },
+        "summary": "Update column",
+        "operationId": "Update_Column",
+        "description": "Update a column on a project",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "column_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ColumnData"
+            }
+          }
+        ]
+      }
+    },
+    "/projects/{project_id}/tasks/{task_id}/comments.json": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "comments": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "id"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "description": "created_at"
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "text"
+                      },
+                      "user_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "user_id"
+                      }
+                    }
+                  },
+                  "description": "comments"
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "count"
+                    }
+                  },
+                  "description": "meta"
+                }
+              }
+            }
+          }
+        },
+        "summary": "List comments",
+        "description": "Get a paginated list of comments for a task.",
+        "operationId": "List_Comments",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "comment": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "id"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "description": "created_at"
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "text"
+                    },
+                    "deleted_at": {
+                      "type": "string",
+                      "description": "deleted_at"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "description": "updated_at"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "id"
+                        },
+                        "email": {
+                          "type": "string",
+                          "description": "email"
+                        },
+                        "display_name": {
+                          "type": "string",
+                          "description": "display_name"
+                        },
+                        "avatar_url": {
+                          "type": "string",
+                          "description": "avatar_url"
+                        }
+                      },
+                      "description": "user"
+                    },
+                    "task": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "id"
+                        },
+                        "project_id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "project_id"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "description": "created_at"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "description": "updated_at"
+                        },
+                        "local_task_id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "local_task_id"
+                        },
+                        "priority_id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "priority_id"
+                        },
+                        "status_id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "status_id"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "description"
+                        },
+                        "tag_names": {
+                          "type": "array",
+                          "items": {},
+                          "description": "tag_names"
+                        },
+                        "external_id": {
+                          "type": "string",
+                          "description": "external_id"
+                        },
+                        "requester_email": {
+                          "type": "string",
+                          "description": "requester_email"
+                        },
+                        "attachments": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "id"
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "name"
+                              },
+                              "url": {
+                                "type": "string",
+                                "description": "url"
+                              }
+                            }
+                          },
+                          "description": "attachments"
+                        },
+                        "screenshot_url": {
+                          "type": "string",
+                          "description": "screenshot_url"
+                        },
+                        "status": {
+                          "type": "string",
+                          "description": "status"
+                        },
+                        "priority": {
+                          "type": "string",
+                          "description": "priority"
+                        },
+                        "closed_at": {
+                          "type": "string",
+                          "description": "closed_at"
+                        },
+                        "secret_link": {
+                          "type": "string",
+                          "description": "secret_link"
+                        },
+                        "admin_link": {
+                          "type": "string",
+                          "description": "admin_link"
+                        },
+                        "deleted_at": {
+                          "type": "string",
+                          "description": "deleted_at"
+                        },
+                        "site": {
+                          "type": "string",
+                          "description": "site"
+                        },
+                        "url": {
+                          "type": "string",
+                          "description": "url"
+                        },
+                        "metadata": {
+                          "type": "string",
+                          "description": "metadata"
+                        },
+                        "screenshot_data": {
+                          "type": "object",
+                          "properties": {
+                            "screenshot_width": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "screenshot_width"
+                            },
+                            "screenshot_height": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "screenshot_height"
+                            },
+                            "screenshot_pin_x": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "screenshot_pin_x"
+                            },
+                            "screenshot_pin_y": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "screenshot_pin_y"
+                            }
+                          },
+                          "description": "screenshot_data"
+                        },
+                        "requester_os": {
+                          "type": "string",
+                          "description": "requester_os"
+                        },
+                        "requester_browser": {
+                          "type": "string",
+                          "description": "requester_browser"
+                        },
+                        "requester_browser_size": {
+                          "type": "string",
+                          "description": "requester_browser_size"
+                        },
+                        "requester_resolution": {
+                          "type": "string",
+                          "description": "requester_resolution"
+                        },
+                        "selector_info": {
+                          "type": "object",
+                          "properties": {
+                            "path": {
+                              "type": "string",
+                              "description": "path"
+                            },
+                            "html": {
+                              "type": "string",
+                              "description": "html"
+                            },
+                            "version": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "version"
+                            },
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "bugOffsetX": {
+                                  "type": "number",
+                                  "format": "float",
+                                  "description": "bugOffsetX"
+                                },
+                                "bugOffsetY": {
+                                  "type": "number",
+                                  "format": "float",
+                                  "description": "bugOffsetY"
+                                }
+                              },
+                              "description": "data"
+                            }
+                          },
+                          "description": "selector_info"
+                        },
+                        "due_at": {
+                          "type": "string",
+                          "description": "due_at"
+                        },
+                        "column_id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "column_id"
+                        },
+                        "assignees": {
+                          "type": "array",
+                          "items": {},
+                          "description": "assignees"
+                        },
+                        "assigned_to": {
+                          "type": "string",
+                          "description": "assigned_to"
+                        },
+                        "requester": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "id"
+                            },
+                            "email": {
+                              "type": "string",
+                              "description": "email"
+                            },
+                            "display_name": {
+                              "type": "string",
+                              "description": "display_name"
+                            },
+                            "avatar_url": {
+                              "type": "string",
+                              "description": "avatar_url"
+                            }
+                          },
+                          "description": "requester"
+                        },
+                        "updater": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "id"
+                            },
+                            "email": {
+                              "type": "string",
+                              "description": "email"
+                            },
+                            "display_name": {
+                              "type": "string",
+                              "description": "display_name"
+                            },
+                            "avatar_url": {
+                              "type": "string",
+                              "description": "avatar_url"
+                            }
+                          },
+                          "description": "updater"
+                        }
+                      },
+                      "description": "task"
+                    }
+                  },
+                  "description": "comment"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create comment",
+        "description": "Adds a new comment to the specified task.",
+        "operationId": "Create_Comment",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "comment": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "description": "text"
+                    },
+                    "user_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "user_id"
+                    }
+                  },
+                  "description": "comment"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/projects/{project_id}/tasks/{task_id}/attachments.json": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "attachments": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "id"
+                      },
+                      "task_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "task_id"
+                      },
+                      "user_id": {
+                        "type": "string",
+                        "description": "user_id"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "description": "created_at"
+                      },
+                      "url": {
+                        "type": "string",
+                        "description": "url"
+                      },
+                      "file_name": {
+                        "type": "string",
+                        "description": "file_name"
+                      }
+                    }
+                  },
+                  "description": "attachments"
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "count"
+                    }
+                  },
+                  "description": "meta"
+                }
+              }
+            }
+          }
+        },
+        "summary": "List attachments",
+        "description": "Get a paginated list of attachments for a task.",
+        "operationId": "List_Attachments",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "description": "default",
+            "schema": {
+              "$ref": "#/definitions/Attachment"
+            }
+          }
+        },
+        "summary": "Create attachment",
+        "description": "Adds a new attachment to the specified task using an existing URL.",
+        "operationId": "Create_Attachment",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "attachment": {
+                  "type": "object",
+                  "properties": {
+                    "file_name": {
+                      "type": "string",
+                      "description": "file_name"
+                    },
+                    "url": {
+                      "type": "string",
+                      "description": "url"
+                    }
+                  },
+                  "description": "attachment"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/projects/{project_id}/tasks/{task_id}/attachments/{attachment_id}.json": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "$ref": "#/definitions/Attachment"
+            }
+          }
+        },
+        "summary": "Show attachment",
+        "description": "Get detail for specific attachment.",
+        "operationId": "Show_Attachment",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attachment_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "success"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete attachment",
+        "description": "Delete an attachment from a task",
+        "operationId": "Delete_Attachment",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attachment_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project_id}/tasks/{task_id}/attachments/upload": {
+      "post": {
+        "responses": {
+          "201": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "attachment": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "id"
+                    },
+                    "task_id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "task_id"
+                    },
+                    "user_id": {
+                      "type": "string",
+                      "description": "user_id"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "description": "created_at"
+                    },
+                    "url": {
+                      "type": "string",
+                      "description": "url"
+                    },
+                    "file_name": {
+                      "type": "string",
+                      "description": "file_name"
+                    }
+                  },
+                  "description": "attachment"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Upload attachment",
+        "description": "Upload a new attachment and add it to the specified task. The file contents need to be specified as the POST data on this request.",
+        "operationId": "Upload_Attachment",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "file_name",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "file_contents",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Organization": {
+      "type": "object",
+      "description": "organization",
+      "properties": {
+        "organization": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int32",
+              "description": "id"
+            },
+            "name": {
+              "type": "string",
+              "description": "name"
+            }
+          }
+        }
+      }
+    },
+    "ColumnData": {
+      "type": "object",
+      "properties": {
+        "column": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "name"
+            }
+          },
+          "description": "column data"
+        }
+      }
+    },
+    "Column": {
+      "type": "object",
+      "description": "column",
+      "properties": {
+        "column": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int32",
+              "description": "id"
+            },
+            "name": {
+              "type": "string",
+              "description": "name"
+            },
+            "project_id": {
+              "type": "integer",
+              "format": "int32",
+              "description": "project_id"
+            },
+            "created_at": {
+              "type": "string",
+              "description": "created_at"
+            },
+            "updated_at": {
+              "type": "string",
+              "description": "updated_at"
+            }
+          }
+        }
+      }
+    },
+    "ColumnArray": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "name"
+          },
+          "project_id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "project_id"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "created_at"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "updated_at"
+          }
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "UserArray": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int32",
+                "description": "id"
+              },
+              "email": {
+                "type": "string",
+                "description": "email"
+              },
+              "display_name": {
+                "type": "string",
+                "description": "display_name"
+              },
+              "avatar_url": {
+                "type": "string",
+                "description": "avatar_url"
+              }
+            }
+          },
+          "description": "users"
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "format": "int32",
+              "description": "count"
+            }
+          },
+          "description": "meta"
+        }
+      }
+    },
+    "Project": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "devurl": {
+              "type": "string"
+            },
+            "is_active": {
+              "type": "boolean"
+            },
+            "is_public": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "example": {
+        "project": {
+          "name": "My Website",
+          "devurl": "http://www.example.com",
+          "is_active": true,
+          "is_public": false
+        }
+      }
+    },
+    "ProjectArray": {
+      "type": "object",
+      "properties": {
+        "projects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int32",
+                "description": "id"
+              },
+              "name": {
+                "type": "string",
+                "description": "name"
+              },
+              "has_custom_columns": {
+                "type": "boolean",
+                "description": "has_custom_columns"
+              }
+            }
+          },
+          "description": "projects"
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "format": "int32",
+              "description": "count"
+            }
+          },
+          "description": "meta"
+        }
+      }
+    },
+    "Attachment": {
+      "type": "object",
+      "properties": {
+        "attachment": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int32",
+              "description": "id"
+            },
+            "task_id": {
+              "type": "integer",
+              "format": "int32",
+              "description": "task_id"
+            },
+            "user_id": {
+              "type": "integer",
+              "format": "int32",
+              "description": "user_id"
+            },
+            "created_at": {
+              "type": "string",
+              "description": "created_at"
+            },
+            "url": {
+              "type": "string",
+              "description": "url"
+            },
+            "file_name": {
+              "type": "string",
+              "description": "file_name"
+            }
+          },
+          "description": "attachment"
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "basic_auth": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "basic_auth": []
+    }
+  ],
+  "tags": []
+}
